@@ -8,11 +8,15 @@ body {
 
 p {
     color: white;
-    font-size: large;
+}
+
+h2 {
+    color: white;
 }
 
 span {
     font-weight: bold;
+    color: white;
 }
 
 .global-weather {
@@ -24,4 +28,8 @@ span {
 .local-weather {
     background-color: #51576d;
     padding: 1rem;
+}
+
+.current-weather {
+    background-color: #303446;
 }
