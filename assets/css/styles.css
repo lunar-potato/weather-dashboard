@@ -14,8 +14,11 @@ h2 {
     color: white;
 }
 
+h4 {
+    color: white;
+}
+
 span {
-    font-weight: bold;
     color: white;
 }
 
@@ -32,4 +35,8 @@ span {
 
 .current-weather {
     background-color: #303446;
+}
+
+.weather-details {
+    background-color: #303446 !important;
 }

@@ -11,6 +11,10 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="./assets/css/styles.css" />
+    <script
+      src="https://kit.fontawesome.com/6fdf758e6f.js"
+      crossorigin="anonymous"
+    ></script>
 
     <title>Weather Dashboard</title>
   </head>
@@ -61,24 +65,106 @@
                       ><span id="celsius">°C</span>
                     </h1>
                   </div>
-                  <br/><br/>
+                  <br /><br />
 
                   <div>
-                    <p><span class="temp-description mx-3">Mostly Cloudy</span></p>
+                    <p class="mx-3">
+                      <span class="temp-description">Mostly Cloudy</span><br />
+                      Feels like
+                      <span class="celsius" id="feels-like">°C</span>
+                    </p>
+                  </div>
+
+                  <div>
+                    <img />
                   </div>
                 </div>
               </section>
             </div>
           </div>
-        </section>
 
-        <!-- Global weather section -->
-        <main class="global-weather col-3 mt-4 rounded">
-          <div>
-            <p>Weather in other <span>cities</span></p>
-          </div>
-        </main>
+          <section class="weather-details col-lg-4 col-md-5 mt-md-2 mx-3">
+            <div class="card p-1 initial">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item d-flex">
+                  <h5>Visibility</h5>
+                  <span id="visibility">0</p>km
+                  <i class="fa-regular fa-eye-slash"></i>
+                </li>
+
+                <li class="list-group-item d-flex">
+                  <h5>Humidity</h5>
+                  <span id="humidity">0</p>%
+                  <i class="fa-solid fa-droplet"></i>
+                </li>
+
+                <li class="list-group-item d-flex">
+                  <h5>Wind Speed</h5>
+                  <span id="wind-speed">0</p>KPH
+                    <i class="fa-solid fa-wind"></i>
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <section class="week-weather d-flex justify-content-md-around my-4"></section>    
+        </section>
       </div>
+
+      <!-- Global weather section -->
+      <main class="global-weather col-3 mt-4 rounded">
+        <div>
+          <p>Weather in other <span style="font-weight: 700;">cities</span><p>
+          <hr/>
+
+          <div class="d-flex flex-column">
+            <div class="container global-items align-items-center">
+              <div class="row">
+                <p class="col">
+                  <b class="country-name"></b>
+                  <br>
+                  <small class="country-initials"></small>
+                </p>
+                <img class="col-3 weather-icon"/>
+                <p class="text-end col">
+                  <strong><span class="global-temp"></span><span class="celsius">°C</span></strong>
+                </p>
+              </div>
+
+              <hr/>
+              <div class="d-flex flex-column">
+                <div class="container global-items align-items-center">
+                  <div class="row">
+                    <p class="col">
+                      <b class="country-name"></b>
+                      <br>
+                      <small class="country-initials"></small>
+                    </p>
+                    <img class="col-3 weather-icon"/>
+                    <p class="text-end col">
+                      <strong><span class="global-temp"></span><span class="celsius">°C</span></strong>
+                    </p>
+                  </div>
+
+                  <hr/>
+              <div class="d-flex flex-column">
+                <div class="container global-items align-items-center">
+                  <div class="row">
+                    <p class="col">
+                      <b class="country-name"></b>
+                      <br>
+                      <small class="country-initials"></small>
+                    </p>
+                    <img class="col-3 weather-icon"/>
+                    <p class="text-end col">
+                      <strong><span class="global-temp"></span><span class="celsius">°C</span></strong>
+                    </p>
+                  </div>
+
+            </div>
+          </div>
+        </div>
+      </main>
     </div>
 
     <!-- Day.js -->
