@@ -1,4 +1,5 @@
 $(document).ready(function () {
+  // Function which displays current weather conditions
   function displayCurrentWeather(city) {
     let apiKey = "69282173b39812bf0a7816a3cef4915a";
     let currentWeatherAPI =
@@ -20,6 +21,7 @@ $(document).ready(function () {
       let humidity = response.main.humidity;
       let windSpeed = response.wind.speed;
 
+      // Creating weather card (current)
       let currentWeatherCard = $("<div>").addClass("card");
       let cardBody = $("<div>").addClass("card-body");
       let cardTitle = $("<h2>")
@@ -38,14 +40,17 @@ $(document).ready(function () {
         .addClass("card-text")
         .text("Wind Speed: " + windSpeed + " m/s");
 
+      // Appending elements to current weather card
       cardTitle.append(weatherIcon);
       cardBody.append(cardTitle, tempEl, humidityEl, windEl);
       currentWeatherCard.append(cardBody);
 
+      // Displaying current weather
       $("#today").empty().append(currentWeatherCard);
     });
   }
 
+  // Function which displays the forecast for 5 days
   function displayForecast(city) {
     let apiKey = "69282173b39812bf0a7816a3cef4915a";
     let fiveForecastAPI =
@@ -61,12 +66,15 @@ $(document).ready(function () {
     }).then(function (response) {
       let forecastData = response.list;
 
+      // Creating forecast card
       let forecastCard = $("<div>").addClass("card");
       let cardBody = $("<div>").addClass("card-body");
       let cardTitle = $("<h2>").addClass("card-title").text("5-Day Forecast");
 
+      // Creating row for the forecast
       let forecastRow = $("<div>").addClass("row");
 
+      // Looping through the forecast data and then creating cards for each day
       for (let i = 0; i < forecastData.length; i++) {
         if (forecastData[i].dt_txt.includes("15:00:00")) {
           let date = dayjs(forecastData[i].dt_txt).format("MM/DD/YYYY");
@@ -75,15 +83,24 @@ $(document).ready(function () {
           let temperature = forecastData[i].main.temp;
           let humidity = forecastData[i].main.humidity;
 
+          // Creating a column for each of the day's forecast
           let forecastCol = $("<div>").addClass("col-md");
           let forecastCardInner = $("<div>").addClass("card");
           let innerCardBody = $("<div>").addClass("card-body");
 
+          // Creating elements for the forecast
           let dateEl = $("<p>").addClass("card-text").text(date);
-          let weatherIcon = $("<img>").attr("src", iconURL).attr("alt", "Weather Icon");
-          let tempEl = $("<p>").addClass("card-text").text("Temp: " + temperature + "°C");
-          let humidityEl = $("<p>").addClass("card-text").text("Humidity: " + humidity + "%");
+          let weatherIcon = $("<img>")
+            .attr("src", iconURL)
+            .attr("alt", "Weather Icon");
+          let tempEl = $("<p>")
+            .addClass("card-text")
+            .text("Temp: " + temperature + "°C");
+          let humidityEl = $("<p>")
+            .addClass("card-text")
+            .text("Humidity: " + humidity + "%");
 
+          // Appending elements accordingly  
           innerCardBody.append(dateEl, weatherIcon, tempEl, humidityEl);
           forecastCardInner.append(innerCardBody);
           forecastCol.append(forecastCardInner);
@@ -91,40 +108,55 @@ $(document).ready(function () {
         }
       }
 
+      // Appending elements accordingly
       cardBody.append(cardTitle, forecastRow);
       forecastCard.append(cardBody);
 
+
+      // Displaying the forecast
       $("#forecast").empty().append(forecastCard);
     });
   }
 
+  // Fucntion which dispalys search history
   function displaySearchHistory() {
     let searchHistory = JSON.parse(localStorage.getItem("searchHistory")) || [];
 
+    // Clearing any existing history
     $("#history").empty();
 
+    // Looping through the search history then creates list items
     for (let i = 0; i < searchHistory.length; i++) {
-        let listItem = $("<button>").addClass("list-group-item list-group-item-action").text(searchHistory[i]);
-        $("#history").append(listItem);
+      let listItem = $("<button>")
+        .addClass("list-group-item list-group-item-action")
+        .text(searchHistory[i]);
+      $("#history").append(listItem);
     }
   }
 
+  // Function which saves seasrch history to user local storage
   function saveSearchHistory(city) {
     let searchHistory = JSON.parse(localStorage.getItem("searchHistory")) || [];
 
+    // Check if the city is in the history
     if (!searchHistory.includes(city)) {
-        searchHistory.unshift(city);
+      // Adding city to the beginning of the history array  
+      searchHistory.unshift(city);
 
-        if (searchHistory.length > 10) {
-            searchHistory.pop();
-        }
+      // Limiting history to 10 items
+      if (searchHistory.length > 10) {
+        searchHistory.pop();
+      }
 
-        localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
+      // Saving updated history to local storage
+      localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
 
-        displaySearchHistory();
+      // Updating the displayed serach history
+      displaySearchHistory();
     }
   }
 
+  // Event listener for the serach form 
   $("#search-form").on("submit", function (event) {
     event.preventDefault();
     let city = $("#search-input").val().trim();
@@ -137,11 +169,13 @@ $(document).ready(function () {
     }
   });
 
+  // Event listener for clicking on a city in search history
   $(document).on("click", ".list-group-item", function () {
     let city = $(this).text();
     displayCurrentWeather(city);
     displayForecast(city);
   });
 
+  // Initializing search history on page load
   displaySearchHistory();
 });
