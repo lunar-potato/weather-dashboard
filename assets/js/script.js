@@ -1,7 +1,7 @@
 $(document).ready(function () {
   // Function which displays current weather conditions
   function displayCurrentWeather(city) {
-    let apiKey = "69282173b39812bf0a7816a3cef4915a";
+    let apiKey = "YOUR APIKEY";
     let currentWeatherAPI =
       "https://api.openweathermap.org/data/2.5/weather?q=" +
       city +
@@ -52,7 +52,7 @@ $(document).ready(function () {
 
   // Function which displays the forecast for 5 days
   function displayForecast(city) {
-    let apiKey = "69282173b39812bf0a7816a3cef4915a";
+    let apiKey = "YOUR APIKEY";
     let fiveForecastAPI =
       "https://api.openweathermap.org/data/2.5/forecast?q=" +
       city +
